@@ -9,7 +9,7 @@ import {isConcatSpec, isFacetSpec, isLayerSpec, isRepeatSpec, isUnitSpec, Spec, 
 import {TimeUnit} from '../timeunit';
 import {formatExpression} from '../timeunit';
 import {QUANTITATIVE} from '../type';
-import {isArray} from '../util';
+import {duplicate, isArray} from '../util';
 import {VgEncodeEntry, VgSort} from '../vega.schema';
 import {ConcatModel} from './concat';
 import {FacetModel} from './facet';
@@ -79,6 +79,9 @@ export function getMarkConfig<P extends keyof MarkConfig>(prop: P, mark: Mark, c
 }
 
 export function formatSignalRef(fieldDef: FieldDef<string>, specifiedFormat: string, expr: 'datum' | 'parent', config: Config, useBinRange?: boolean) {
+  if (specifiedFormat) {
+    console.log(specifiedFormat);
+  }
   if (fieldDef.type === 'quantitative') {
     const format = numberFormat(fieldDef, specifiedFormat, config, 'text');
     if (fieldDef.bin) {
