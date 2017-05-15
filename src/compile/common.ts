@@ -79,9 +79,6 @@ export function getMarkConfig<P extends keyof MarkConfig>(prop: P, mark: Mark, c
 }
 
 export function formatSignalRef(fieldDef: FieldDef<string>, specifiedFormat: string, expr: 'datum' | 'parent', config: Config, useBinRange?: boolean) {
-  if (specifiedFormat) {
-    console.log(specifiedFormat);
-  }
   if (fieldDef.type === 'quantitative') {
     const format = numberFormat(fieldDef, specifiedFormat, config, 'text');
     if (fieldDef.bin) {
@@ -102,10 +99,19 @@ export function formatSignalRef(fieldDef: FieldDef<string>, specifiedFormat: str
   } else if (fieldDef.type === 'temporal') {
     const isUTCScale = isScaleFieldDef(fieldDef) && fieldDef['scale'] && fieldDef['scale'].type === ScaleType.UTC;
     return {
-      signal: timeFormatExpression(field(fieldDef, {expr}), fieldDef.timeUnit, specifiedFormat, config.text.shortTimeLabels, config.timeFormat, isUTCScale)
+      signal: timeFormatExpression(field(fieldDef, {expr}), fieldDef.timeUnit,
+        specifiedFormat, config.text.shortTimeLabels, config.timeFormat, isUTCScale)
     };
   } else {
-    return {signal: field(fieldDef, {expr})};
+    if (!specifiedFormat || specifiedFormat === 'number') {
+      const format = numberFormat(fieldDef, specifiedFormat, config, 'text');
+      return {signal: `format(${field(fieldDef, {expr})}, '${format}')`};
+    } else {
+      return {
+        signal: timeFormatExpression(field(fieldDef, {expr}), fieldDef.timeUnit,
+          specifiedFormat, config.text.shortTimeLabels, config.timeFormat, specifiedFormat === 'utc')
+      };
+    }
   }
 }
 
