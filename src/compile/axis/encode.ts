@@ -13,7 +13,7 @@ export function labels(model: UnitModel, channel: Channel, labelsSpec: any, def:
   const config = model.config;
 
   // Text
-  if (fieldDef.type === TEMPORAL) {
+  if ((fieldDef.type === TEMPORAL || fieldDef.type === NOMINAL) && axis.format) {
     const isUTCScale = model.scale(channel).type === ScaleType.UTC;
     labelsSpec = extend({
       text: {
@@ -21,7 +21,6 @@ export function labels(model: UnitModel, channel: Channel, labelsSpec: any, def:
       }
     }, labelsSpec);
   }
-
   // Label Angle
   if (axis.labelAngle !== undefined) {
     labelsSpec.angle = {value: axis.labelAngle};

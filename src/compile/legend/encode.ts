@@ -1,3 +1,4 @@
+import {NOMINAL} from 'vega-lite/build/src/type';
 import {Channel, COLOR, SHAPE} from '../../channel';
 import {FieldDef, isFieldDef, isValueDef} from '../../fielddef';
 import {AREA, BAR, CIRCLE, FILL_STROKE_CONFIG, LINE, POINT, SQUARE, TEXT, TICK} from '../../mark';
@@ -76,7 +77,7 @@ export function labels(fieldDef: FieldDef<string>, labelsSpec: any, model: UnitM
 
   let labels:any = {};
 
-  if (fieldDef.type === TEMPORAL) {
+  if (fieldDef.type === TEMPORAL || fieldDef.type === NOMINAL) {
     const isUTCScale = model.scale(channel).type === ScaleType.UTC;
     labelsSpec = extend({
       text: {
