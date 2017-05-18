@@ -78,7 +78,7 @@ export function getMarkConfig<P extends keyof MarkConfig>(prop: P, mark: Mark, c
   return config.mark[prop];
 }
 
-export function formatSignalRef(fieldDef: FieldDef<string>, specifiedFormat: string, expr: 'datum' | 'parent', config: Config, useBinRange?: boolean) {
+export function formatSignalRef(fieldDef: FieldDef<string>, specifiedFormat: string, expr: 'datum' | 'parent', config: Config, formatType: string, useBinRange?: boolean) {
   if (fieldDef.type === 'quantitative') {
     const format = numberFormat(fieldDef, specifiedFormat, config, 'text');
     if (fieldDef.bin) {
@@ -103,15 +103,7 @@ export function formatSignalRef(fieldDef: FieldDef<string>, specifiedFormat: str
         specifiedFormat, config.text.shortTimeLabels, config.timeFormat, isUTCScale)
     };
   } else {
-    if (!specifiedFormat || specifiedFormat === 'number') {
-      const format = numberFormat(fieldDef, specifiedFormat, config, 'text');
-      return {signal: `format(${field(fieldDef, {expr})}, '${format}')`};
-    } else {
-      return {
-        signal: timeFormatExpression(field(fieldDef, {expr}), fieldDef.timeUnit,
-          specifiedFormat, config.text.shortTimeLabels, config.timeFormat, specifiedFormat === 'utc')
-      };
-    }
+    return {signal: field(fieldDef, {expr})};
   }
 }
 
