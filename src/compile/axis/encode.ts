@@ -4,7 +4,7 @@ import {contains, extend, keys} from '../../util';
 import {VgAxis} from '../../vega.schema';
 
 import {ScaleType} from '../../scale';
-import {timeFormatExpression} from '../common';
+import {numberFormat, timeFormatExpression} from '../common';
 import {UnitModel} from '../unit';
 
 export function labels(model: UnitModel, channel: Channel, labelsSpec: any, def: VgAxis) {
@@ -13,13 +13,27 @@ export function labels(model: UnitModel, channel: Channel, labelsSpec: any, def:
   const config = model.config;
 
   // Text
-  if ((fieldDef.type === TEMPORAL || fieldDef.type === NOMINAL) && axis.format) {
+  if (fieldDef.type === TEMPORAL) {
     const isUTCScale = model.scale(channel).type === ScaleType.UTC;
     labelsSpec = extend({
       text: {
         signal: timeFormatExpression('datum.value', fieldDef.timeUnit, axis.format, config.axis.shortTimeLabels, config.timeFormat, isUTCScale)
       }
     }, labelsSpec);
+  } else if ((fieldDef.type === NOMINAL || fieldDef.type === ORDINAL) && axis.format) {
+    if (fieldDef['formatType'] === 'number') {
+      labelsSpec = extend({
+        text: {
+          signal: `format(${fieldDef.field}, '${numberFormat(fieldDef, axis.format, config, 'text')}')`
+        }
+      }, labelsSpec || {});
+    } else if (fieldDef['formatType']) {
+      labelsSpec = extend({
+        text: {
+          signal: timeFormatExpression('datum.value', fieldDef.timeUnit, axis.format, config.legend.shortTimeLabels, config.timeFormat, fieldDef['formatType'] === 'utc')
+        }
+      }, labelsSpec || {});
+    }
   }
   // Label Angle
   if (axis.labelAngle !== undefined) {

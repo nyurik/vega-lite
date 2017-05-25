@@ -1,14 +1,13 @@
-import {NOMINAL} from 'vega-lite/build/src/type';
 import {Channel, COLOR, SHAPE} from '../../channel';
 import {FieldDef, isFieldDef, isValueDef} from '../../fielddef';
 import {AREA, BAR, CIRCLE, FILL_STROKE_CONFIG, LINE, POINT, SQUARE, TEXT, TICK} from '../../mark';
-import {TEMPORAL} from '../../type';
+import {NOMINAL, ORDINAL, TEMPORAL} from '../../type';
 import {extend, keys, without} from '../../util';
 
 import {VgValueRef} from '../../vega.schema';
 
 import {ScaleType} from '../../scale';
-import {applyMarkConfig, timeFormatExpression} from '../common';
+import {applyMarkConfig, numberFormat, timeFormatExpression} from '../common';
 import * as mixins from '../mark/mixins';
 import {UnitModel} from '../unit';
 
@@ -77,13 +76,28 @@ export function labels(fieldDef: FieldDef<string>, labelsSpec: any, model: UnitM
 
   let labels:any = {};
 
-  if (fieldDef.type === TEMPORAL || fieldDef.type === NOMINAL) {
+  if (fieldDef.type === TEMPORAL) {
     const isUTCScale = model.scale(channel).type === ScaleType.UTC;
     labelsSpec = extend({
       text: {
         signal: timeFormatExpression('datum.value', fieldDef.timeUnit, legend.format, config.legend.shortTimeLabels, config.timeFormat, isUTCScale)
       }
     }, labelsSpec || {});
+    // TODO: Use spread operator
+  } else if ((fieldDef.type === NOMINAL || fieldDef.type === ORDINAL) && legend.format) {
+    if (fieldDef['formatType'] === 'number') {
+      labelsSpec = extend({
+        text: {
+          signal: `format(${fieldDef.field}, '${numberFormat(fieldDef, legend.format, config, 'text')}')`
+        }
+      }, labelsSpec || {});
+    } else if (fieldDef['formatType']) {
+      labelsSpec = extend({
+        text: {
+          signal: timeFormatExpression('datum.value', fieldDef.timeUnit, legend.format, config.legend.shortTimeLabels, config.timeFormat, fieldDef['formatType'] === 'utc')
+        }
+      }, labelsSpec || {});
+    }
   }
 
   labels = extend(labels, labelsSpec || {});

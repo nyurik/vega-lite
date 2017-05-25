@@ -78,7 +78,7 @@ export function getMarkConfig<P extends keyof MarkConfig>(prop: P, mark: Mark, c
   return config.mark[prop];
 }
 
-export function formatSignalRef(fieldDef: FieldDef<string>, specifiedFormat: string, expr: 'datum' | 'parent', config: Config, formatType: string, useBinRange?: boolean) {
+export function formatSignalRef(fieldDef: FieldDef<string>, specifiedFormat: string, expr: 'datum' | 'parent', config: Config, formatType: 'number' | 'time' | 'utc', useBinRange?: boolean) {
   if (fieldDef.type === 'quantitative') {
     const format = numberFormat(fieldDef, specifiedFormat, config, 'text');
     if (fieldDef.bin) {
@@ -87,8 +87,7 @@ export function formatSignalRef(fieldDef: FieldDef<string>, specifiedFormat: str
         return {signal: field(fieldDef, {expr, binSuffix: 'range'})};
       } else {
         return {
-          signal: `format(${field(fieldDef, {expr, binSuffix: 'start'})}, '${format}')` + `+'-'+` +
-            `format(${field(fieldDef, {expr, binSuffix: 'end'})}, '${format}')`
+          signal: `format(${field(fieldDef, {expr, binSuffix: 'start'})}, '${format}')+'-'+format(${field(fieldDef, {expr, binSuffix: 'end'})}, '${format}')`
         };
       }
     } else {
@@ -99,12 +98,20 @@ export function formatSignalRef(fieldDef: FieldDef<string>, specifiedFormat: str
   } else if (fieldDef.type === 'temporal') {
     const isUTCScale = isScaleFieldDef(fieldDef) && fieldDef['scale'] && fieldDef['scale'].type === ScaleType.UTC;
     return {
-      signal: timeFormatExpression(field(fieldDef, {expr}), fieldDef.timeUnit,
-        specifiedFormat, config.text.shortTimeLabels, config.timeFormat, isUTCScale)
+      signal: timeFormatExpression(field(fieldDef, {expr}), fieldDef.timeUnit, specifiedFormat, config.text.shortTimeLabels, config.timeFormat, isUTCScale)
     };
-  } else {
-    return {signal: field(fieldDef, {expr})};
+  } else if (specifiedFormat) {
+    if (formatType === 'number') {
+      return {
+          signal: `format(${field(fieldDef, {expr})}, '${numberFormat(fieldDef, specifiedFormat, config, 'text')}')`
+      };
+    } else {
+      return {
+        signal: timeFormatExpression(field(fieldDef, {expr}), fieldDef.timeUnit, specifiedFormat, config.text.shortTimeLabels, config.timeFormat, formatType === 'utc')
+      };
+    }
   }
+  return {signal: field(fieldDef, {expr})};
 }
 
 /**
@@ -142,6 +149,7 @@ export function timeFormatExpression(field: string, timeUnit: TimeUnit, format: 
     } else {
       return `timeFormat(${field}, '${_format}')`;
     }
+    // TODO: This block^ of code can be made concise.
   } else {
     return formatExpression(timeUnit, field, shortTimeLabels, isUTCScale);
   }
