@@ -222,6 +222,7 @@ describe('FacetModel', function() {
       });
       model.parseAxisAndHeader();
       assert(model.component.layoutHeaders.column.fieldRef, "parent[\"a\"]");
+      assert.deepEqual(model.channels(), ['row', 'column']);
     });
   });
 });

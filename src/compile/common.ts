@@ -143,13 +143,8 @@ export function numberFormat(fieldDef: FieldDef<string>, specifiedFormat: string
 export function timeFormatExpression(field: string, timeUnit: TimeUnit, format: string, shortTimeLabels: boolean, timeFormatConfig: string, isUTCScale: boolean): string {
   if (!timeUnit || format) {
     // If there is not time unit, or if user explicitly specify format for axis/legend/text.
-    const _format = format || timeFormatConfig; // only use config.timeFormat if there is no timeUnit.
-    if (isUTCScale) {
-      return `utcFormat(${field}, '${_format}')`;
-    } else {
-      return `timeFormat(${field}, '${_format}')`;
-    }
-    // TODO: This block^ of code can be made concise.
+    // only use config.timeFormat if there is no timeUnit.
+    return `${isUTCScale ? 'utc' : 'time'}Format(${field}, '${format || timeFormatConfig}')`;
   } else {
     return formatExpression(timeUnit, field, shortTimeLabels, isUTCScale);
   }

@@ -7,9 +7,9 @@ import {TimeUnit} from '../../../src/timeunit';
 import {TEMPORAL} from '../../../src/type';
 import {parseUnitModel} from '../../util';
 
-describe('compile/legend', function() {
-  describe('encode.symbols', function() {
-    it('should not have strokeDash and strokeDashOffset', function() {
+describe('compile/legend', () => {
+  describe('encode.symbols', () => {
+    it('should not have strokeDash and strokeDashOffset', () => {
       const symbol = encode.symbols({field: 'a'}, {}, parseUnitModel({
           mark: "point",
           encoding: {
@@ -21,7 +21,7 @@ describe('compile/legend', function() {
         assert.isUndefined((symbol||{}).strokeDashOffset);
     });
 
-    it('should return not override size of the symbol for shape channel', function() {
+    it('should return not override size of the symbol for shape channel', () => {
       const symbol = encode.symbols({field: 'a'}, {}, parseUnitModel({
           mark: "point",
           encoding: {
@@ -31,7 +31,7 @@ describe('compile/legend', function() {
         assert.isUndefined(symbol.size);
     });
 
-    it('should return specific symbols.shape.value if user has specified', function() {
+    it('should return specific symbols.shape.value if user has specified', () => {
       const symbol = encode.symbols({field: 'a'}, {}, parseUnitModel({
           mark: "point",
           encoding: {
@@ -42,8 +42,8 @@ describe('compile/legend', function() {
     });
   });
 
-  describe('encode.labels', function() {
-    it('should return correct expression for the timeUnit: TimeUnit.MONTH', function() {
+  describe('encode.labels', () => {
+    it('should return correct expression for the timeUnit: TimeUnit.MONTH', () => {
       const model = parseUnitModel({
         mark: "point",
         encoding: {
@@ -56,7 +56,7 @@ describe('compile/legend', function() {
       assert.deepEqual(label.text.signal, expected);
     });
 
-    it('should return correct expression for the timeUnit: TimeUnit.QUARTER', function() {
+    it('should return correct expression for the timeUnit: TimeUnit.QUARTER', () => {
       const model = parseUnitModel({
         mark: "point",
         encoding: {
