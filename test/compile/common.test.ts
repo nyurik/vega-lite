@@ -73,10 +73,10 @@ describe('Common', () => {
   describe('formatSignalRef()', () => {
     it('should return signals with proper formats for a quantitative fieldDef', () => {
       const fieldDef = {field: 'a', bin: {}, type: QUANTITATIVE};
-      assert.deepEqual(formatSignalRef(fieldDef, 'd', 'parent', {}, 'number', true), {signal: 'parent[\"bin_a_range\"]'});
-      assert.deepEqual(formatSignalRef(fieldDef, 'd', 'parent', {}, 'number', false), {signal: 'format(parent["bin_a_start"], \'d\')+\'-\'+format(parent["bin_a_end"], \'d\')'});
+      assert.deepEqual(formatSignalRef(fieldDef, 'd', 'parent', {}, 'number', 'text',true), {signal: 'parent[\"bin_a_range\"]'});
+      assert.deepEqual(formatSignalRef(fieldDef, 'd', 'parent', {}, 'number', 'text',false), {signal: 'format(parent["bin_a_start"], \'d\')+\'-\'+format(parent["bin_a_end"], \'d\')'});
       delete fieldDef.bin;
-      assert.deepEqual(formatSignalRef(fieldDef, 'd', 'parent', {}, 'number', true), {signal: 'format(parent["a"], \'d\')'});
+      assert.deepEqual(formatSignalRef(fieldDef, 'd', 'parent', {}, 'number', 'text', true), {signal: 'format(parent["a"], \'d\')'});
     });
   });
 });

@@ -181,7 +181,7 @@ export class FacetModel extends ModelWithField {
 
       this.component.layoutHeaders[channel] = {
         title,
-        fieldRef: formatSignalRef(fieldDef, header.format, 'parent', this.config, fieldDef['formatType'] || 'number', true),
+        fieldRef: formatSignalRef(fieldDef, header.format, 'parent', this.config, fieldDef['formatType'] || 'number', channel, true),
         // TODO: support adding label to footer as well
         header: [this.makeHeaderComponent(channel, true)]
       };
