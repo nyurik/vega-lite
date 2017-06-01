@@ -4,7 +4,7 @@ import {assert} from 'chai';
 import {COLOR, SHAPE} from '../../../src/channel';
 import * as encode from '../../../src/compile/legend/encode';
 import {TimeUnit} from '../../../src/timeunit';
-import {TEMPORAL} from '../../../src/type';
+import {NOMINAL, ORDINAL, TEMPORAL} from '../../../src/type';
 import {parseUnitModel} from '../../util';
 
 describe('compile/legend', () => {
@@ -67,6 +67,31 @@ describe('compile/legend', () => {
       const label = encode.labels(fieldDef, {}, model, COLOR);
       const expected = `'Q' + quarter(datum.value)`;
       assert.deepEqual(label.text.signal, expected);
+    });
+
+     it('should return correct expression when you want to format the legend as integers', () => {
+      const model = parseUnitModel({
+        mark: "point",
+        encoding: {
+          x: {field: "a", type: "temporal"},
+          color: {field: "a", type: "O", formatType: "number", legend: {format: "d"}}
+        }
+      });
+      const fieldDef = {field: 'a', type: ORDINAL, formatType: "number", legend: {format: "d"}};
+      const label = encode.labels(fieldDef, {}, model, COLOR);
+      assert.deepEqual(label, {text: {signal: 'format(a, \'d\')'}});
+    });
+
+    it('should return correct expression when you want to format the legend in a time format', () => {
+      const model = parseUnitModel({
+        mark: "point",
+        encoding: {
+          x: {field: "a", type: "temporal"},
+          color: {field: "a", type: "N", timeUnit: "quarter", formatType: "time", legend: {format: "%y"}}}
+      });
+      const fieldDef = {field: 'a', type: NOMINAL, formatType: "time", legend: {format: "%y"}};
+      const label = encode.labels(fieldDef, {}, model, COLOR);
+      assert.deepEqual(label, {text: {signal: 'timeFormat(datum.value, \'%y\')'}});
     });
   });
 });

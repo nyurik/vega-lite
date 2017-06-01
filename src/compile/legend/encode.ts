@@ -83,12 +83,11 @@ export function labels(fieldDef: FieldDef<string>, labelsSpec: any, model: UnitM
         signal: timeFormatExpression('datum.value', fieldDef.timeUnit, legend.format, config.legend.shortTimeLabels, config.timeFormat, isUTCScale)
       }
     }, labelsSpec || {});
-    // TODO: Use spread operator
   } else if ((fieldDef.type === NOMINAL || fieldDef.type === ORDINAL) && legend.format) {
     if (fieldDef['formatType'] === 'number') {
       labelsSpec = extend({
         text: {
-          signal: `format(${fieldDef.field}, '${numberFormat(fieldDef, legend.format, config, 'text')}')`
+          signal: `format(${fieldDef.field}, '${numberFormat(fieldDef, legend.format, config, channel)}')`
         }
       }, labelsSpec || {});
     } else if (fieldDef['formatType']) {

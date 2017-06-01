@@ -1,7 +1,7 @@
 /* tslint:disable:quotemark */
 
 import {assert} from 'chai';
-import {X} from '../../src/channel';
+import {TEXT, X} from '../../src/channel';
 import {formatSignalRef, numberFormat, timeFormatExpression} from '../../src/compile/common';
 import {defaultConfig} from '../../src/config';
 import {field, FieldDef} from '../../src/fielddef';
@@ -68,6 +68,10 @@ describe('Common', () => {
         assert.equal(numberFormat({bin: true, field: 'a', type: type}, undefined, {}, X), undefined);
       }
     });
+
+    it('should use integers if aggregating using count and in channel text', () => {
+      assert.equal(numberFormat({bin: true, field: 'a', type: QUANTITATIVE, aggregate: 'count'}, undefined, {}, TEXT), 'd');
+    });
   });
 
   describe('formatSignalRef()', () => {
@@ -77,6 +81,11 @@ describe('Common', () => {
       assert.deepEqual(formatSignalRef(fieldDef, 'd', 'parent', {}, 'number', 'text',false), {signal: 'format(parent["bin_a_start"], \'d\')+\'-\'+format(parent["bin_a_end"], \'d\')'});
       delete fieldDef.bin;
       assert.deepEqual(formatSignalRef(fieldDef, 'd', 'parent', {}, 'number', 'text', true), {signal: 'format(parent["a"], \'d\')'});
+    });
+
+    it('should return timeFormat as the signal in ordinal fieldDefs', () => {
+      const fieldDef = {field: 'a', type: ORDINAL, timeUnit: TimeUnit.QUARTER};
+      assert.deepEqual(formatSignalRef(fieldDef, 'd', 'parent', {text: {shortTimeLabels: false}, timeFormat: "%y"}, 'time', 'text',true), {signal: 'timeFormat(parent["quarter_a"], \'d\')'});
     });
   });
 });

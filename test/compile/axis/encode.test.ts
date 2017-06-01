@@ -42,5 +42,37 @@ describe('compile/axis', () => {
       const expected = "'Q' + quarter(datum.value) + ' ' + timeFormat(datum.value, '%b %Y')";
       assert.equal(labels.text.signal, expected);
     });
+
+    it('should format temporal formatType properly even if other parameters like angle is changed', () => {
+      const model = parseUnitModel({
+        mark: "point",
+        encoding: {
+          x: {field: "a", type: "O", timeUnit: "yearquartermonth", formatType: "time", axis: {format: "%y", labelAngle: 90}}
+        }
+      });
+      const labels = encode.labels(model, 'x', {}, {});
+      assert.deepEqual(labels, {
+        text: {signal: 'timeFormat(datum.value, \'%y\')'},
+        angle: {value: 90},
+        align: {value: 'center'},
+        baseline: {value: 'bottom'}
+      });
+    });
+
+    it('should format temporal formatType if axis is formatted as an integers', () => {
+      const model = parseUnitModel({
+        mark: "point",
+        encoding: {
+          x: {field: "a", type: "N", formatType: "number", axis: {format: "d"}}
+        }
+      });
+      const labels = encode.labels(model, 'x', {}, {});
+      assert.deepEqual(labels, {
+        text: {signal: 'format(a, \'d\')'},
+        angle: {value: 270},
+        align: {value: 'right'},
+        baseline: {value: 'middle'}
+      });
+    });
   });
 });

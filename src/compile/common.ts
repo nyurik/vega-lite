@@ -139,9 +139,6 @@ export function formatSignalRef(fieldDef: FieldDef<string>, specifiedFormat: str
 export function numberFormat(fieldDef: FieldDef<string>, specifiedFormat: string, config: Config, channel: Channel) {
   // Specified format in axis/legend has higher precedence than fieldDef.format
   const format = specifiedFormat;
-  if (fieldDef.type === QUANTITATIVE) {
-    // add number format for quantitative type only
-
     if (format) {
       return format;
     } else if (fieldDef.aggregate === 'count' && channel === TEXT) {
@@ -150,8 +147,6 @@ export function numberFormat(fieldDef: FieldDef<string>, specifiedFormat: string
     }
     // TODO: need to make this work correctly for numeric ordinal / nominal type
     return config.numberFormat;
-  }
-  return undefined;
 }
 
 /**

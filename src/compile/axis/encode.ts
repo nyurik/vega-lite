@@ -24,7 +24,7 @@ export function labels(model: UnitModel, channel: Channel, labelsSpec: any, def:
     if (fieldDef['formatType'] === 'number') {
       labelsSpec = extend({
         text: {
-          signal: `format(${fieldDef.field}, '${numberFormat(fieldDef, axis.format, config, 'text')}')`
+          signal: `format(${fieldDef.field}, '${numberFormat(fieldDef, axis.format, config, channel)}')`
         }
       }, labelsSpec || {});
     } else if (fieldDef['formatType']) {
