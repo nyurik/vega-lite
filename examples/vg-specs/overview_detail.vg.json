@@ -500,6 +500,7 @@
                     "axes": [
                         {
                             "scale": "concat_0_x",
+                            "format": "%Y",
                             "orient": "bottom",
                             "tickCount": 5,
                             "title": "date",
@@ -520,6 +521,7 @@
                         {
                             "scale": "concat_0_x",
                             "domain": false,
+                            "format": "%Y",
                             "grid": true,
                             "labels": false,
                             "orient": "bottom",
@@ -622,6 +624,7 @@
                     "axes": [
                         {
                             "scale": "concat_1_x",
+                            "format": "s",
                             "orient": "bottom",
                             "tickCount": 5,
                             "zindex": 1,
@@ -641,6 +644,7 @@
                         {
                             "scale": "concat_1_x",
                             "domain": false,
+                            "format": "s",
                             "grid": true,
                             "labels": false,
                             "orient": "bottom",

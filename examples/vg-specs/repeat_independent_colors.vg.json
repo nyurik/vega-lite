@@ -217,6 +217,7 @@
                     "legends": [
                         {
                             "stroke": "child_Origin_color",
+                            "format": "s",
                             "title": "Origin"
                         }
                     ]
@@ -354,6 +355,7 @@
                     "legends": [
                         {
                             "stroke": "child_Cylinders_color",
+                            "format": "s",
                             "title": "Cylinders"
                         }
                     ]

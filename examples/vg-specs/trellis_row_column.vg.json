@@ -424,10 +424,12 @@
     "legends": [
         {
             "stroke": "color",
+            "format": "s",
             "title": "Cylinders"
         },
         {
             "shape": "shape",
+            "format": "s",
             "title": "Origin",
             "encode": {
                 "symbols": {

@@ -475,6 +475,7 @@
     "axes": [
         {
             "scale": "x",
+            "format": "s",
             "orient": "bottom",
             "tickCount": 5,
             "title": "YEAR(start)",
@@ -501,6 +502,7 @@
         {
             "scale": "x",
             "domain": false,
+            "format": "s",
             "grid": true,
             "labels": false,
             "orient": "bottom",
@@ -530,6 +532,7 @@
     "legends": [
         {
             "fill": "color",
+            "format": "s",
             "title": "event"
         }
     ]

@@ -155,6 +155,7 @@
     "axes": [
         {
             "scale": "x",
+            "format": "s",
             "orient": "bottom",
             "tickCount": 5,
             "title": "HOURS(time)",
@@ -180,6 +181,7 @@
         },
         {
             "scale": "y",
+            "format": "s",
             "orient": "left",
             "title": "DAY(time)",
             "zindex": 1,

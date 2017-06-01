@@ -178,6 +178,7 @@
     "axes": [
         {
             "scale": "x",
+            "format": "s",
             "orient": "bottom",
             "tickCount": 5,
             "title": "age",
@@ -220,6 +221,7 @@
     "legends": [
         {
             "fill": "color",
+            "format": "s",
             "title": "gender",
             "encode": {
                 "symbols": {

@@ -182,10 +182,12 @@
     "legends": [
         {
             "stroke": "color",
+            "format": "s",
             "title": "Origin"
         },
         {
             "shape": "shape",
+            "format": "s",
             "title": "Origin",
             "encode": {
                 "symbols": {

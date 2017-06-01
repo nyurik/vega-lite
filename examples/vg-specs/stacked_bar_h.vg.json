@@ -185,6 +185,7 @@
         },
         {
             "scale": "y",
+            "format": "s",
             "orient": "left",
             "title": "variety",
             "zindex": 1
@@ -193,6 +194,7 @@
     "legends": [
         {
             "fill": "color",
+            "format": "s",
             "title": "site",
             "encode": {
                 "symbols": {

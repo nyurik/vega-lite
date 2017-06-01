@@ -178,6 +178,7 @@
     "axes": [
         {
             "scale": "x",
+            "format": "s",
             "orient": "bottom",
             "tickCount": 5,
             "title": "Month of the year",
@@ -223,6 +224,7 @@
     "legends": [
         {
             "fill": "color",
+            "format": "s",
             "title": "Weather type",
             "encode": {
                 "symbols": {

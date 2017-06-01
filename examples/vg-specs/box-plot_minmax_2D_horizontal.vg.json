@@ -420,6 +420,7 @@
         },
         {
             "scale": "y",
+            "format": "s",
             "orient": "left",
             "title": "age",
             "zindex": 1

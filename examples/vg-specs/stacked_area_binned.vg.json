@@ -274,6 +274,7 @@
     "legends": [
         {
             "fill": "color",
+            "format": "s",
             "title": "Cylinders"
         }
     ]

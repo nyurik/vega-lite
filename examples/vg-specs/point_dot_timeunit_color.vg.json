@@ -150,6 +150,7 @@
     "legends": [
         {
             "stroke": "color",
+            "format": "s",
             "title": "YEARMONTH(date)",
             "encode": {
                 "labels": {

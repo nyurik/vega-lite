@@ -168,6 +168,7 @@
     "legends": [
         {
             "fill": "color",
+            "format": "s",
             "title": "Origin",
             "encode": {
                 "symbols": {

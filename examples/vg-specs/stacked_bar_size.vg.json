@@ -176,6 +176,7 @@
     "axes": [
         {
             "scale": "x",
+            "format": "s",
             "orient": "bottom",
             "tickCount": 5,
             "title": "MONTH(date)",
@@ -221,6 +222,7 @@
     "legends": [
         {
             "size": "size",
+            "format": "s",
             "title": "weather",
             "encode": {
                 "symbols": {

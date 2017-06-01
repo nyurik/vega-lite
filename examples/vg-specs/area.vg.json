@@ -142,6 +142,7 @@
     "axes": [
         {
             "scale": "x",
+            "format": "%Y",
             "orient": "bottom",
             "tickCount": 5,
             "title": "YEARMONTH(date)",
@@ -162,6 +163,7 @@
         {
             "scale": "x",
             "domain": false,
+            "format": "%Y",
             "grid": true,
             "labels": false,
             "orient": "bottom",

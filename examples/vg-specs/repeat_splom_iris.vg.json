@@ -2954,6 +2954,7 @@
     "legends": [
         {
             "stroke": "color",
+            "format": "s",
             "title": "species"
         }
     ]

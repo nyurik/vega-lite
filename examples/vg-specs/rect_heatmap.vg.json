@@ -144,6 +144,7 @@
     "axes": [
         {
             "scale": "x",
+            "format": "s",
             "orient": "bottom",
             "tickCount": 5,
             "title": "Cylinders",
@@ -166,6 +167,7 @@
         },
         {
             "scale": "y",
+            "format": "s",
             "orient": "left",
             "title": "Origin",
             "zindex": 1

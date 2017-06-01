@@ -221,6 +221,7 @@
         {
             "scale": "x",
             "domain": false,
+            "format": "%Y",
             "orient": "bottom",
             "tickCount": 5,
             "tickSize": 0,
@@ -242,6 +243,7 @@
         {
             "scale": "x",
             "domain": false,
+            "format": "%Y",
             "grid": true,
             "labels": false,
             "orient": "bottom",
@@ -255,6 +257,7 @@
     "legends": [
         {
             "fill": "color",
+            "format": "s",
             "title": "series"
         }
     ]

@@ -156,6 +156,7 @@
                     "axes": [
                         {
                             "scale": "y",
+                            "format": "s",
                             "orient": "left",
                             "title": "variety",
                             "zindex": 1
@@ -334,6 +335,7 @@
     "legends": [
         {
             "stroke": "color",
+            "format": "s",
             "title": "year"
         }
     ]

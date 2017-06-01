@@ -881,6 +881,7 @@
     "legends": [
         {
             "stroke": "color",
+            "format": "s",
             "title": "Cylinders"
         }
     ]

@@ -187,6 +187,7 @@
         },
         {
             "scale": "y",
+            "format": "s",
             "orient": "left",
             "title": "a",
             "zindex": 1

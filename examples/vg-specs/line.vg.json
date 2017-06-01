@@ -119,6 +119,7 @@
     "axes": [
         {
             "scale": "x",
+            "format": "s",
             "orient": "bottom",
             "tickCount": 5,
             "title": "date",
@@ -145,6 +146,7 @@
         {
             "scale": "x",
             "domain": false,
+            "format": "s",
             "grid": true,
             "labels": false,
             "orient": "bottom",

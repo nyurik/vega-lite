@@ -209,6 +209,7 @@
                     "axes": [
                         {
                             "scale": "x",
+                            "format": "s",
                             "orient": "bottom",
                             "tickCount": 5,
                             "title": "QUARTER(date)",
@@ -355,6 +356,7 @@
     "legends": [
         {
             "stroke": "color",
+            "format": "s",
             "title": "symbol"
         }
     ]
