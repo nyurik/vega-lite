@@ -20,7 +20,7 @@
             "transform": [
                 {
                     "type": "filter",
-                    "expr": "datum.symbol==='GOOG'"
+                    "expr": "(datum.symbol==='GOOG')"
                 }
             ]
         },

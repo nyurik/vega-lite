@@ -15,7 +15,7 @@
             "transform": [
                 {
                     "type": "filter",
-                    "expr": "datum.year == 2000"
+                    "expr": "(datum.year == 2000)"
                 },
                 {
                     "type": "formula",

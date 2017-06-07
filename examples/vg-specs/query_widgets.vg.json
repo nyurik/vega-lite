@@ -64,7 +64,7 @@
                 },
                 {
                     "type": "filter",
-                    "expr": "vlPoint(\"CylYr_store\", \"layer_1_\", datum, \"union\", \"all\")"
+                    "expr": "((vlPoint(\"CylYr_store\", \"layer_1_\", datum, \"union\", \"all\")))"
                 },
                 {
                     "type": "filter",

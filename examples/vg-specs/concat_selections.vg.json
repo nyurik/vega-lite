@@ -707,7 +707,7 @@
                             },
                             "stroke": [
                                 {
-                                    "test": "vlInterval(\"brush_store\", \"concat_1_\", datum, \"union\", \"all\")",
+                                    "test": "(vlInterval(\"brush_store\", \"concat_1_\", datum, \"union\", \"all\"))",
                                     "value": "steelblue"
                                 },
                                 {

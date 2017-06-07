@@ -576,7 +576,7 @@
                     },
                     "stroke": [
                         {
-                            "test": "vlInterval(\"brush_store\", \"layer_0_\", datum, \"union\", \"all\")",
+                            "test": "(vlInterval(\"brush_store\", \"layer_0_\", datum, \"union\", \"all\"))",
                             "value": "grey"
                         },
                         {
@@ -626,7 +626,7 @@
                     ],
                     "size": [
                         {
-                            "test": "vlPoint(\"cyl_store\", \"layer_1_\", datum, \"union\", \"all\")",
+                            "test": "(vlPoint(\"cyl_store\", \"layer_1_\", datum, \"union\", \"all\"))",
                             "value": 150
                         },
                         {

@@ -95,7 +95,7 @@
                 },
                 {
                     "type": "filter",
-                    "expr": "datum.delay < 500"
+                    "expr": "(datum.delay < 500)"
                 },
                 {
                     "type": "filter",
