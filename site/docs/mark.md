@@ -10,14 +10,21 @@ Marks are the basic visual building block of a visualization. They provide basic
 The `mark` property of a [single view specification](spec.html#single-view-spec) can either be (1) a string describing [mark type](#mark-type) or (2) a mark definition object.
 
 {: .suppress-error}
-```json
+| ```json
 {
   "data": ... ,
-  "mark": ... ,       // mark
+  "mark": "line" ,   // mark
   "encoding": ... ,
   ...
 }
-```
+``` | ```json
+{
+  "data": ... ,
+  "mark": { "type": "line", "interpolate": "linear", ... },
+  "encoding": ... ,
+  ...
+}
+``` |
 
 ## Mark Definition Object
 {:#mark-def}
